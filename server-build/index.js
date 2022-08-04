@@ -16,7 +16,7 @@
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _src_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/App */ \"./src/App.js\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ \"react-redux\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _src_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/store */ \"./src/store.js\");\n/* harmony import */ var _src_pages_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/pages/Home */ \"./src/pages/Home.js\");\n\n\n\n\n\n\n\nconst PORT = process.env.PORT || 3000;\nconst app = express__WEBPACK_IMPORTED_MODULE_2___default()();\napp.get(\"/*\", (req, res) => {\n  const store = (0,_src_store__WEBPACK_IMPORTED_MODULE_5__[\"default\"])();\n  const dataRequire = store.dispatch(_src_pages_Home__WEBPACK_IMPORTED_MODULE_6__[\"default\"].serverFetch());\n  Promise.resolve(dataRequire).then(() => {\n    const jsx = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {\n      store: store\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_src_App__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null));\n    const app = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToString(jsx);\n    const reduxState = store.getState();\n    res.writeHead(200, {\n      \"Content-Type\": \"text/html\"\n    });\n    res.end(htmlTemplate(app, reduxState));\n  }).catch(err => {\n    console.log(err);\n  });\n});\n\nfunction htmlTemplate(reactDom, reduxState) {\n  return `\n        <!DOCTYPE html>\n        <html>\n        <head>\n            <meta charset=\"utf-8\">\n            <title>React SSR</title>\n        </head>\n        \n        <body>\n            <div id=\"app\">${reactDom}</div>\n            <script>\n                window.REDUX_DATA = ${JSON.stringify(reduxState)}\n            </script>\n            <script src=\"./app.bundle.js\"></script>\n        </body>\n        </html>\n    `;\n}\n\napp.use(express__WEBPACK_IMPORTED_MODULE_2___default()[\"static\"](\"./build\"));\napp.listen(PORT, () => {\n  console.log(`Server is listening on port ${PORT}`);\n});\n\n//# sourceURL=webpack://react-ssr/./server/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _src_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/App */ \"./src/App.js\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ \"react-redux\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _src_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/store */ \"./src/store.js\");\n/* harmony import */ var _src_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../src/router */ \"./src/router.js\");\n/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom/server */ \"react-router-dom/server\");\n/* harmony import */ var react_router_dom_server__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_router_dom_server__WEBPACK_IMPORTED_MODULE_8__);\n\n\n\n\n\n\n\n\n\nconst PORT = process.env.PORT || 3000;\nconst app = express__WEBPACK_IMPORTED_MODULE_3___default()(); // app.use(express.static(\"./build\"));\n\napp.use(express__WEBPACK_IMPORTED_MODULE_3___default()[\"static\"](path__WEBPACK_IMPORTED_MODULE_1___default().resolve(__dirname, \"./build\")));\napp.get(\"/*\", (req, res) => {\n  const context = {};\n  const store = (0,_src_store__WEBPACK_IMPORTED_MODULE_6__[\"default\"])();\n  store.dispatch((0,_src_store__WEBPACK_IMPORTED_MODULE_6__.initializeSession)());\n  const dataRequire = _src_router__WEBPACK_IMPORTED_MODULE_7__[\"default\"].filter(route => req.url === route.path).map(route => route.element).filter(route => route.serverFetch).map(route => store.dispatch(route.serverFetch()));\n  Promise.all(dataRequire).then(() => {\n    const jsx = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, {\n      store: store\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom_server__WEBPACK_IMPORTED_MODULE_8__.StaticRouter, {\n      location: req.url,\n      context: context\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_src_App__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null)));\n    const app = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(jsx);\n    const reduxState = store.getState();\n    res.writeHead(200, {\n      \"Content-Type\": \"text/html\"\n    });\n    res.end(htmlTemplate(app, reduxState));\n  }).catch(err => {\n    console.log(err);\n  });\n});\napp.listen(PORT, () => {\n  console.log(`Server is listening on port ${PORT}`);\n});\n\nfunction htmlTemplate(reactDom, reduxState) {\n  return ` <!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n            <meta charset=\"utf-8\">\n            <title>React SSR</title>\n        </head>\n        \n        <body>\n            <div id=\"app\">${reactDom}</div>\n            <script>\n                window.REDUX_DATA = ${JSON.stringify(reduxState)}\n            </script>\n            <script  src=\"./app.bundle.js\"></script>\n        </body>\n        </html>\n    `;\n}\n\n//# sourceURL=webpack://react-ssr/./server/index.js?");
 
 /***/ }),
 
@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Home */ \"./src/pages/Home.js\");\n\n\n\nconst App = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Home__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://react-ssr/./src/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Home */ \"./src/pages/Home.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router */ \"./src/router.js\");\n\n\n\n\n\nconst App = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Routes, null, _router__WEBPACK_IMPORTED_MODULE_3__[\"default\"].map(route => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {\n    key: route.path,\n    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(route.element, null),\n    path: `${route.path}`\n  })));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://react-ssr/./src/App.js?");
 
 /***/ }),
 
@@ -36,7 +36,27 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fetchAPI\": () => (/* binding */ fetchAPI)\n/* harmony export */ });\n/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! isomorphic-fetch */ \"isomorphic-fetch\");\n/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction fetchAPI() {\n  return isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0___default()(\"https://jsonplaceholder.typicode.com/posts\").then(response => response.json()).then(data => data);\n}\n\n//# sourceURL=webpack://react-ssr/./src/api.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"fetchAPI\": () => (/* binding */ fetchAPI),\n/* harmony export */   \"fetchAPI2\": () => (/* binding */ fetchAPI2)\n/* harmony export */ });\n/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! isomorphic-fetch */ \"isomorphic-fetch\");\n/* harmony import */ var isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction fetchAPI() {\n  return isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0___default()(\"https://jsonplaceholder.typicode.com/posts\").then(response => response.json()).then(data => data);\n}\nfunction fetchAPI2() {\n  return isomorphic_fetch__WEBPACK_IMPORTED_MODULE_0___default()(\"https://jsonplaceholder.typicode.com/posts/1\").then(response => response.json()).then(data => data);\n}\n\n//# sourceURL=webpack://react-ssr/./src/api.js?");
+
+/***/ }),
+
+/***/ "./src/pages/About.js":
+/*!****************************!*\
+  !*** ./src/pages/About.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"react-redux\");\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ \"./src/store.js\");\n\n\n\n\nconst About = props => {\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    props.fetchDataAbout();\n  }, []);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"About\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"ul\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"li\", null, props.posts.userId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"li\", null, props.posts.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"li\", null, props.posts.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"li\", null, props.posts.body)));\n};\n\nAbout.serverFetch = _store__WEBPACK_IMPORTED_MODULE_2__.fetchDataAbout;\n\nconst mapStateToProps = state => ({\n  posts: state.data\n});\n\nconst mapDispatchToProps = {\n  fetchDataAbout: _store__WEBPACK_IMPORTED_MODULE_2__.fetchDataAbout\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(About));\n\n//# sourceURL=webpack://react-ssr/./src/pages/About.js?");
+
+/***/ }),
+
+/***/ "./src/pages/Contact.js":
+/*!******************************!*\
+  !*** ./src/pages/Contact.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst Contact = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, \"Contact\");\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Contact);\n\n//# sourceURL=webpack://react-ssr/./src/pages/Contact.js?");
 
 /***/ }),
 
@@ -50,13 +70,33 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/pages/Secret.js":
+/*!*****************************!*\
+  !*** ./src/pages/Secret.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nconst Secret = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, \"Secret\");\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Secret);\n\n//# sourceURL=webpack://react-ssr/./src/pages/Secret.js?");
+
+/***/ }),
+
+/***/ "./src/router.js":
+/*!***********************!*\
+  !*** ./src/router.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _pages_About__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/About */ \"./src/pages/About.js\");\n/* harmony import */ var _pages_Contact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Contact */ \"./src/pages/Contact.js\");\n/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Home */ \"./src/pages/Home.js\");\n/* harmony import */ var _pages_Secret__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Secret */ \"./src/pages/Secret.js\");\n\n\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{\n  path: \"/\",\n  element: _pages_Home__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n}, {\n  path: \"/about\",\n  element: _pages_About__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n}, {\n  path: \"/contact\",\n  element: _pages_Contact__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n}, {\n  path: \"/secret\",\n  element: _pages_Secret__WEBPACK_IMPORTED_MODULE_3__[\"default\"]\n}]);\n\n//# sourceURL=webpack://react-ssr/./src/router.js?");
+
+/***/ }),
+
 /***/ "./src/store.js":
 /*!**********************!*\
   !*** ./src/store.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"fetchData\": () => (/* binding */ fetchData),\n/* harmony export */   \"initializeSession\": () => (/* binding */ initializeSession)\n/* harmony export */ });\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"redux\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api */ \"./src/api.js\");\n\n\n\nconst initializeSession = () => ({\n  type: \"INITIALIZE_SESSION\"\n});\n\nconst storeData = data => ({\n  type: \"STORE_DATA\",\n  data\n});\n\nconst fetchData = () => dispatch => (0,_api__WEBPACK_IMPORTED_MODULE_2__.fetchAPI)().then(data => dispatch(storeData(data)));\n\nconst sessionReducer = function () {\n  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n  let action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case \"INITIALIZE_SESSION\":\n      return true;\n\n    default:\n      return state;\n  }\n};\n\nconst dataReducer = function () {\n  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n  let action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case \"STORE_DATA\":\n      return action.data;\n\n    default:\n      return state;\n  }\n};\n\nconst reducer = (0,redux__WEBPACK_IMPORTED_MODULE_0__.combineReducers)({\n  loggedIn: sessionReducer,\n  data: dataReducer\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initialState => (0,redux__WEBPACK_IMPORTED_MODULE_0__.createStore)(reducer, initialState, (0,redux__WEBPACK_IMPORTED_MODULE_0__.applyMiddleware)((redux_thunk__WEBPACK_IMPORTED_MODULE_1___default()))));\n\n//# sourceURL=webpack://react-ssr/./src/store.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"fetchData\": () => (/* binding */ fetchData),\n/* harmony export */   \"fetchDataAbout\": () => (/* binding */ fetchDataAbout),\n/* harmony export */   \"initializeSession\": () => (/* binding */ initializeSession)\n/* harmony export */ });\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"redux\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api */ \"./src/api.js\");\n\n\n\nconst initializeSession = () => ({\n  type: \"INITIALIZE_SESSION\"\n});\n\nconst storeData = data => ({\n  type: \"STORE_DATA\",\n  data\n});\n\nconst fetchData = () => dispatch => (0,_api__WEBPACK_IMPORTED_MODULE_2__.fetchAPI)().then(data => dispatch(storeData(data)));\nconst fetchDataAbout = () => dispatch => (0,_api__WEBPACK_IMPORTED_MODULE_2__.fetchAPI2)().then(data => dispatch(storeData(data)));\n\nconst sessionReducer = function () {\n  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n  let action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case \"INITIALIZE_SESSION\":\n      return true;\n\n    default:\n      return state;\n  }\n};\n\nconst dataReducer = function () {\n  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];\n  let action = arguments.length > 1 ? arguments[1] : undefined;\n\n  switch (action.type) {\n    case \"STORE_DATA\":\n      return action.data;\n\n    default:\n      return state;\n  }\n};\n\nconst reducer = (0,redux__WEBPACK_IMPORTED_MODULE_0__.combineReducers)({\n  loggedIn: sessionReducer,\n  data: dataReducer\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initialState => (0,redux__WEBPACK_IMPORTED_MODULE_0__.createStore)(reducer, initialState, (0,redux__WEBPACK_IMPORTED_MODULE_0__.applyMiddleware)((redux_thunk__WEBPACK_IMPORTED_MODULE_1___default()))));\n\n//# sourceURL=webpack://react-ssr/./src/store.js?");
 
 /***/ }),
 
@@ -110,6 +150,26 @@ module.exports = require("react-redux");
 
 /***/ }),
 
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "react-router-dom/server":
+/*!******************************************!*\
+  !*** external "react-router-dom/server" ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = require("react-router-dom/server");
+
+/***/ }),
+
 /***/ "redux":
 /*!************************!*\
   !*** external "redux" ***!
@@ -127,6 +187,16 @@ module.exports = require("redux");
 /***/ ((module) => {
 
 module.exports = require("redux-thunk");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");
 
 /***/ })
 

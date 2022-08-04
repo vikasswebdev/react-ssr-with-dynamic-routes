@@ -6,22 +6,18 @@ import Secret from "./pages/Secret";
 export default [
   {
     path: "/",
-    component: Home,
-    exact: true,
+    element: Home,
   },
   {
     path: "/about",
-    component: About,
-    exact: true,
+    element: About,
   },
   {
     path: "/contact",
-    component: Contact,
-    exact: true,
+    element: Contact,
   },
   {
     path: "/secret",
-    component: Secret,
-    exact: true,
+    element: Secret,
   },
 ];
