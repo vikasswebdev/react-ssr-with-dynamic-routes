@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchDataAbout } from "../store";
+import { fetchPostData } from "../store";
+import { useParams, parsePath } from "react-router-dom";
 
-const About = (props) => {
+const Post = (props) => {
+  const { id } = useParams();
+
   useEffect(() => {
-    props.fetchDataAbout();
+    props.fetchPostData(id);
   }, [props]);
 
   return (
@@ -20,8 +23,8 @@ const About = (props) => {
   );
 };
 
-About.serverFetch = () => {
-  return fetchDataAbout();
+Post.serverFetch = (id) => {
+  return fetchPostData(id);
 };
 
 const mapStateToProps = (state) => ({
@@ -29,10 +32,11 @@ const mapStateToProps = (state) => ({
 });
 
 // const mapDispatchToProps = {
-//   fetchDataAbout,
+//   fetchPostData,
 // };
-const mapDispatchToProps = (state) => ({
-  fetchDataAbout,
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+const mapDispatchToProps = {
+  fetchPostData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

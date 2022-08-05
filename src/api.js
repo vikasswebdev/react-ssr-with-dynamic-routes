@@ -7,7 +7,15 @@ export function fetchAPI() {
 }
 
 export function fetchAPI2() {
-  return fetch("https://jsonplaceholder.typicode.com/posts/1")
+  return fetch(`https://jsonplaceholder.typicode.com/posts/1`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+}
+
+export function fetchPost(id) {
+  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
     .then((response) => response.json())
     .then((data) => data);
 }

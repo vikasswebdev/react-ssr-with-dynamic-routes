@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { fetchAPI, fetchAPI2 } from "./api";
+import { fetchAPI, fetchAPI2, fetchPost } from "./api";
 
 export const initializeSession = () => ({
   type: "INITIALIZE_SESSION",
@@ -14,8 +14,16 @@ const storeData = (data) => ({
 export const fetchData = () => (dispatch) =>
   fetchAPI().then((data) => dispatch(storeData(data)));
 
-export const fetchDataAbout = () => (dispatch) =>
-  fetchAPI2().then((data) => dispatch(storeData(data)));
+export const fetchDataAbout = () => (dispatch) => {
+  return fetchAPI2().then((data) => dispatch(storeData(data)));
+};
+
+export const fetchPostData = (id) => (dispatch) => {
+  return fetchPost(id).then((data) => dispatch(storeData(data)));
+};
+
+// export const fetchPostData = (id) => (dispatch) =>
+//   fetchPost(id).then((data) => dispatch(storeData(data)));
 
 const sessionReducer = (state = {}, action) => {
   switch (action.type) {
